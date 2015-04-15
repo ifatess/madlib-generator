@@ -21,18 +21,17 @@ nouns = [(n,t) for (n,t) in tagged_file if t == 'NN'] # how would you do this wi
 pnouns = [(n,t) for (n,t) in tagged_file if t == 'NNS']
 verbs = [(n,t) for (n,t) in tagged_file if t == 'VB']
 adjs = [(n,t) for (n,t) in tagged_file if t == 'JJ']
+#adjs = filter(lambda n,t: t == "JJ", tagged_file)
 
 # list all parts of speech we care about -- save tuple lists in one
 all_types = [nouns, pnouns, verbs, adjs] # this is a list of lists of tuples
 
 # function for picking random words from a set of words that are a certain pos
-def pick_random_words(wordlist,number):
+def pick_random_words(wordlist,number): # TODO: add check for number not being too many
 	num = len(wordlist)
 	indexes = [random.choice(range(num)) for x in range(number)]
 	words = [wordlist[i][0] for i in indexes]
 	return words
-	# except:
-	# 	print "Looks like there aren't that many words available.\nTry running this function with a smaller number."
 
 for t in all_types: # a t is a list of tuples of that type
 	wl = pick_random_words(t,2) # using the function, get a list of words and pick out a number to replace
@@ -47,7 +46,7 @@ for wd in split_text: # for each word in the list split_text
 	if wd in tagmap: # if it's a POS abbreviation like NN or JJ
 		new_word = raw_input("Please enter a %s:\n" % (tagmap[wd])) # ask for the correct type of word and save it in a variable
 		interpolators.append(new_word)
-		split_text[i] = "%s" #new_word # change the list, since lists are mutable, so that index is that word now
+		split_text[i] = "%s" # change the list, since lists are mutable, so that index is that word now
 	i += 1 # add 1 to i to keep up index count
 
 print " ".join(split_text) % (tuple(interpolators)) # use the " ".join() str method to put the list back together into a paragraph
