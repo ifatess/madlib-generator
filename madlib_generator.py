@@ -35,15 +35,16 @@ def pick_random_words(wordlist,number):
 	# 	print "Looks like there aren't that many words available.\nTry running this function with a smaller number."
 
 for t in all_types: # a t is a list of tuples of that type
-	wl = pick_random_words(t,3) # using the function, get a list of words and pick out a number to replace
+	wl = pick_random_words(t,2) # using the function, get a list of words and pick out a number to replace
 	for w in wl:  # for each of those list of words we picked,
 		para = para.replace(w,t[0][1]) # replace it with the abbrevation for the POS
 
 # play madlib
 i = 0 
+
 split_text = nltk.word_tokenize(para) # retokenize the madlibbed text -- we want to go through a list of 'words'
 for wd in split_text: # for each word in the list split_text
-	if wd in tagset: # if it's a POS abbreviation like NN or JJ
+	if wd in tagmap or len([k for k in tagmap.keys() if k in wd]): # if it's a POS abbreviation like NN or JJ
 		new_word = raw_input("Please enter a %s:\n" % (tagmap[wd])) # ask for the correct type of word and save it in a variable
 		split_text[i] = new_word # change the list, since lists are mutable, so that index is that word now
 	i += 1 # add 1 to i to keep up index count
