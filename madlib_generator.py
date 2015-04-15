@@ -41,12 +41,13 @@ for t in all_types: # a t is a list of tuples of that type
 
 # play madlib
 i = 0 
-
+interpolators = []
 split_text = nltk.word_tokenize(para) # retokenize the madlibbed text -- we want to go through a list of 'words'
 for wd in split_text: # for each word in the list split_text
-	if wd in tagmap or len([k for k in tagmap.keys() if k in wd]): # if it's a POS abbreviation like NN or JJ
+	if wd in tagmap: # if it's a POS abbreviation like NN or JJ
 		new_word = raw_input("Please enter a %s:\n" % (tagmap[wd])) # ask for the correct type of word and save it in a variable
-		split_text[i] = new_word # change the list, since lists are mutable, so that index is that word now
+		interpolators.append(new_word)
+		split_text[i] = "%s" #new_word # change the list, since lists are mutable, so that index is that word now
 	i += 1 # add 1 to i to keep up index count
 
-print " ".join(split_text) # use the " ".join() str method to put the list back together into a paragraph
+print " ".join(split_text) % (tuple(interpolators)) # use the " ".join() str method to put the list back together into a paragraph
