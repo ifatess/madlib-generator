@@ -3,7 +3,7 @@ import nltk # requires some downloading/installing dependencies to use all its f
 import random
 
 debug = False #True
-
+# Here is a comment for SI206
 # get file from user to make mad lib out of
 if debug:
 	print "Getting information from file madlib_test.txt...\n"
