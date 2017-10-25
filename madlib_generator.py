@@ -1,10 +1,8 @@
-# code developed by Jackie Cohen; revised by Paul Resnick
-import nltk # requires some downloading/installing dependencies to use all its features; numpy is especially tricky to install
+# code developed by Jackie Cohen; revised by Paul Resnick and Colleen Van Lent
+import nltk #
 import random
 
 debug = False #True
-# Here is a comment for SI206
-# get file from user to make mad lib out of
 if debug:
 	print "Getting information from file madlib_test.txt...\n"
 fname = "madlib_test.txt" # need a file with this name in directory
@@ -31,8 +29,11 @@ final_words = []
 
 
 for (word, tag) in tagged_tokens:
-	if tag not in substitution_probabilities or random.random() > substitution_probabilities[tag]:
-		final_words.append(spaced(word))
+	if tag not in substitution_probabilities 
+		if random.random() > substitution_probabilities[tag]:
+			final_words.append(spaced(word))
+		substitution_probabilities[tag]:
+			final_words.append(spaced(word)) # This is a terrible revision, but it will introduce a conflict
 	else:
 		new_word = raw_input("Please enter %s:\n" % (tagmap[tag]))
 		final_words.append(spaced(new_word))
